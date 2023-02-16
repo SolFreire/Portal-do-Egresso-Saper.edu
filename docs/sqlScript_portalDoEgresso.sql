@@ -1,5 +1,5 @@
 create table entity (
-	idEntity number primary key,
+	idEntity integer primary key,
 	name varchar2(255) not null,
 	phone varchar2(13),
 	email varchar2(255),
@@ -14,23 +14,23 @@ create table entity (
 );
 
 create table physicalPerson (
-    entityidEntity number primary key,
+    entityidEntity integer primary key,
     lastName varchar2(255) not null,
     cpf varchar2(11) not null,
     foreign key (entityidEntity) references entity
 );
 
 create table legalPerson (
-    entityidEntity number primary key,
+    entityidEntity integer primary key,
     cnpj varchar2(14) not null,
     fantasyName varchar2(255) not null,
     foreign key (entityidEntity) references entity
 );
 
 create table academicEducation (
-    idAcademicEducation number primary key,
-    legalPersonentityidEntity number not null,
-    physicalPersonentityidEntity number not null,
+    idAcademicEducation integer primary key,
+    legalPersonentityidEntity integer not null,
+    physicalPersonentityidEntity integer not null,
     levelAE number not null,
     course varchar2(255) not null,
     initiation date not null,
@@ -40,9 +40,9 @@ create table academicEducation (
 );
 
 create table work (
-    idWork number primary key,
-    legalPersonentityidEntity number not null,
-    physicalPersonentityidEntity number not null,
+    idWork integer primary key,
+    legalPersonentityidEntity integer not null,
+    physicalPersonentityidEntity integer not null,
     startWork date not null,
     endWork date not null,
     name varchar2(255) not null,
@@ -52,9 +52,9 @@ create table work (
 );
 
 create table message (
-    idMessage number primary key,
-    sender number not null,
-    recipient number not null,
+    idMessage integer primary key,
+    sender integer not null,
+    recipient integer not null,
     text long not null,
     datetime timestamp not null,
     foreign key (sender) references entity,
@@ -62,27 +62,28 @@ create table message (
 );
 
 create table skill (
-    idSkill number primary key,
+    idSkill integer primary key,
     name varchar2(255) not null,
     description long
 );
 
 create table jobOpportunity (
-    idJobOpportunity number primary key,
-    legalPersonentityidEntity number not null,
+    idJobOpportunity integer primary key,
+    legalPersonentityidEntity integer not null,
     opportunity varchar2(255) not null,
     salary number(20, 2) not null,
-    description long
+    description long,
+    foreign key (legalPersonentityidEntity) references legalPerson
 );
 
 create table jobOpportunity_skill (
-    jobOpportunityidJobOpportunity number not null,
-    skillidSkill number not null,
+    jobOpportunityidJobOpportunity integer,
+    skillidSkill integer,
     primary key (jobOpportunityidJobOpportunity, skillidSkill)
 );
 
 create table physicalPerson_skill (
-    physicalPersonentityidEntity number not null,
-    skillidSkill number not null,
+    physicalPersonentityidEntity integer,
+    skillidSkill integer,
     primary key (physicalPersonentityidEntity, skillidSkill)
 );
