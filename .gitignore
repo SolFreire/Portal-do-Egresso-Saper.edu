@@ -1,2 +1,2 @@
-# Ignora os arquivos de backup da ferramenta Visual Paradigm
-*.bak*
+# Ignore arquivos de backup da ferramenta Visual Paradigm
+*.vpp.bak_*
